@@ -7,18 +7,28 @@ function App() {
   const fruitsList = ["Banana","Apple", "Orange", "Mango", "Pineapple", "Watermelon"]
 
   const [search, setSearch] = useState('')
-  const [output, seOutput] = useState([])
+  const [output, seOutput] = useState(fruitsList)
   
-  useEffect(()=>{
-    seOutput([])
-    fruitsList.filter(val =>{
-      if(val.toLowerCase().includes(search.toLowerCase())){
-        seOutput(output=> [...output, val])
-      }
-    })
-  },[search])
+  // useEffect(()=>{
+  //   //seOutput([])
+  //   // fruitsList.filter(val =>{
+  //   //   if(val.toLowerCase().includes(search.toLowerCase())){
+  //   //     seOutput(output=> [...output, val])
+  //   //   }
 
 
+
+  //   //})
+  // },[search])
+
+
+
+  const searchfruits = (e)=>{
+    setSearch(e.target.value)
+    const filterList = fruitsList.filter(fruit => fruit.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()))
+    seOutput(filterList)
+
+  }
   
   return (
 
@@ -26,15 +36,15 @@ function App() {
        
        {/* Search Bar */}
         <div>
-            Search:<input onChange={e =>setSearch(e.target.value)} type="text" />
+            Search:<input onChange={searchfruits} type="text" value={search}/>
         </div>
 
         {/* Output */}
         <div>
           {
-            output.map((list,i)=>{
+            output.map((list)=>{
               return(
-                       <p key={i}>{list}</p>
+                       <p key ={list}> {list}</p>
               )
             })
           }
