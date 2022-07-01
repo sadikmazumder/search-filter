@@ -1,35 +1,33 @@
-import React , {useState, useEffect} from 'react';
+import React , {useState} from 'react';
 import './App.css';
-
 
 function App() {
 
-  const fruitsList = ["Banana","Apple", "Orange", "Mango", "Pineapple", "Watermelon"]
+  //const fruitsList = ["Banana","Apple", "Orange", "Mango", "Pineapple", "Watermelon"]
+
+
+    const fruitsList =[
+      {  fruit_name : "Apple", source: '/fruits_images/apple.png'},
+      {  fruit_name : "Banana", source: '/fruits_images/banana.jpg'},
+      {  fruit_name : "Orange", source: '/fruits_images/orange.jpg'},
+      {  fruit_name : "Mango", source: '/fruits_images/mango.jpeg'},
+      {  fruit_name : "Pineapple", source: '/fruits_images/pineapple.jpg'},
+      {  fruit_name : "Watermelon", source: '/fruits_images/watermelon.jpg'}
+    ]
+
 
   const [search, setSearch] = useState('')
   const [output, seOutput] = useState(fruitsList)
   
-  // useEffect(()=>{
-  //   //seOutput([])
-  //   // fruitsList.filter(val =>{
-  //   //   if(val.toLowerCase().includes(search.toLowerCase())){
-  //   //     seOutput(output=> [...output, val])
-  //   //   }
 
 
-
-  //   //})
-  // },[search])
-
-
-
-  const searchfruits = (e)=>{
-    setSearch(e.target.value)
-    const filterList = fruitsList.filter(fruit => fruit.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()))
-    seOutput(filterList)
-
-  }
   
+  const searchfruits = (event)=>{
+    setSearch(event.target.value)
+    const filterList = fruitsList.filter(fruit => fruit.toLocaleLowerCase().includes(event.target.value.toLocaleLowerCase()))
+    seOutput(filterList)
+  }
+
   return (
 
       <div className='App'>
@@ -42,9 +40,15 @@ function App() {
         {/* Output */}
         <div>
           {
-            output.map((list)=>{
+            output.map((list, i)=>{
               return(
-                       <p key ={list}> {list}</p>
+                       <p key ={i}> 
+                          {list.fruit_name} 
+                          <img src={list.source}/>
+                          <hr/>
+                        </p>
+
+                      // <p key={list}>{list}</p>
               )
             })
           }
