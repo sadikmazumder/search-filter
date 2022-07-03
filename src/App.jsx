@@ -24,7 +24,8 @@ function App() {
   
   const searchfruits = (event)=>{
     setSearch(event.target.value)
-    const filterList = fruitsList.filter(fruit => fruit.toLocaleLowerCase().includes(event.target.value.toLocaleLowerCase()))
+    const filterList = fruitsList.filter(fruit => fruit.fruit_name.toLocaleLowerCase().includes(event.target.value.toLocaleLowerCase().trim()))
+
     seOutput(filterList)
   }
 
@@ -38,17 +39,16 @@ function App() {
         </div>
 
         {/* Output */}
-        <div>
+        <div className='grid'>
           {
             output.map((list, i)=>{
+             
               return(
-                       <p key ={i}> 
-                          {list.fruit_name} 
-                          <img src={list.source}/>
-                          <hr/>
-                        </p>
+                       <div key ={i} > 
+                          <img src={list.source} />    
+                          <div className='grid_item'> {list.fruit_name} <hr/></div>  
 
-                      // <p key={list}>{list}</p>
+                       </div>
               )
             })
           }
